@@ -40,7 +40,8 @@ syn region  hamlDocType start="^\s*!!!" end="$"
 syn region  hamlRuby   matchgroup=hamlRubyOutputChar start="[=~]" end="$" contained contains=@hamlRubyTop keepend
 syn region  hamlRuby   matchgroup=hamlRubyChar       start="-"    end="$" contained contains=@hamlRubyTop keepend
 syn match   hamlPlainChar "\\" contained
-syn region hamlInterpolatable matchgroup=hamlInterpolatableChar start="==" end="$" keepend contained contains=rubyInterpolation
+syn region hamlInterpolatable matchgroup=hamlInterpolatableChar start="==" end="$" keepend contained contains=hamlInterpolation
+syn region hamlInterpolation matchgroup=hamlInterpolationDelimiter start="#{" end="}" contained contains=@hamlRubyTop
 
 syn match   hamlHelper  "\<action_view?\|\.\@<!\<\%(flatten\|open\|puts\)" contained containedin=@hamlEmbeddedRuby,@hamlRubyTop,rubyInterpolation
 syn keyword hamlHelper   capture_haml find_and_preserve  html_attrs init_haml_helpers list_of preced preserve succeed surround tab_down tab_up page_class contained containedin=@hamlEmbeddedRuby,@hamlRubyTop,rubyInterpolation
@@ -57,26 +58,27 @@ syn region  hamlComment     start="^\z(\s*\)-#" end="^\%(\z1 \)\@!" contains=rub
 syn region  hamlHtmlComment start="^\z(\s*\)/" end="^\%(\z1 \)\@!" contains=@hamlTop,rubyTodo
 syn match   hamlIEConditional "\%(^\s*/\)\@<=\[if\>[^]]*]" contained containedin=hamlHtmlComment
 
-hi def link hamlSelfCloser          Special
-hi def link hamlDespacer            Special
-hi def link hamlClassChar           Special
-hi def link hamlIdChar              Special
-hi def link hamlTag                 Special
-hi def link hamlClass               Type
-hi def link hamlId                  Identifier
-hi def link hamlPlainChar           Special
-hi def link hamlInterpolatableChar  hamlRubyChar
-hi def link hamlRubyOutputChar      hamlRubyChar
-hi def link hamlRubyChar            Special
-hi def link hamlDocType             PreProc
-hi def link hamlFilter              PreProc
-hi def link hamlAttributesDelimiter Delimiter
-hi def link hamlObjectDelimiter     Delimiter
-hi def link hamlHelper              Function
-hi def link hamlHtmlComment         hamlComment
-hi def link hamlComment             Comment
-hi def link hamlIEConditional       SpecialComment
-hi def link hamlError               Error
+hi def link hamlSelfCloser             Special
+hi def link hamlDespacer               Special
+hi def link hamlClassChar              Special
+hi def link hamlIdChar                 Special
+hi def link hamlTag                    Special
+hi def link hamlClass                  Type
+hi def link hamlId                     Identifier
+hi def link hamlPlainChar              Special
+hi def link hamlInterpolatableChar     hamlRubyChar
+hi def link hamlRubyOutputChar         hamlRubyChar
+hi def link hamlRubyChar               Special
+hi def link hamlInterpolationDelimiter Delimiter
+hi def link hamlDocType                PreProc
+hi def link hamlFilter                 PreProc
+hi def link hamlAttributesDelimiter    Delimiter
+hi def link hamlObjectDelimiter        Delimiter
+hi def link hamlHelper                 Function
+hi def link hamlHtmlComment            hamlComment
+hi def link hamlComment                Comment
+hi def link hamlIEConditional          SpecialComment
+hi def link hamlError                  Error
 
 let b:current_syntax = "haml"
 
