@@ -15,29 +15,7 @@ let s:undo_ftplugin = ""
 let s:browsefilter = "All Files (*.*)\t*.*\n"
 let s:match_words = ""
 
-if !exists("g:haml_default_subtype")
-  let g:haml_default_subtype = "html"
-endif
-
-if !exists("b:haml_subtype")
-  let s:lines = getline(1)."\n".getline(2)."\n".getline(3)."\n".getline(4)."\n".getline(5)."\n".getline("$")
-  let b:haml_subtype = matchstr(s:lines,'haml_subtype=\zs\w\+')
-  if b:haml_subtype == ''
-    let b:haml_subtype = matchstr(substitute(expand("%:t"),'\c\%(\.haml\)\+$','',''),'\.\zs\w\+$')
-  endif
-  if b:haml_subtype == 'txt'
-    " Conventional; not a real file type
-    let b:haml_subtype = 'text'
-  elseif b:haml_subtype == ''
-    let b:haml_subtype = g:haml_default_subtype
-  endif
-endif
-
-if exists("b:haml_subtype") && b:haml_subtype != ''
-  exe "runtime! ftplugin/".b:haml_subtype.".vim ftplugin/".b:haml_subtype."_*.vim ftplugin/".b:haml_subtype."/*.vim"
-else
-  runtime! ftplugin/html.vim ftplugin/html_*.vim ftplugin/html/*.vim
-endif
+runtime! ftplugin/html.vim ftplugin/html_*.vim ftplugin/html/*.vim
 unlet! b:did_ftplugin
 
 " Override our defaults if these were set by an included ftplugin.
@@ -70,7 +48,7 @@ endif
 
 " Change the browse dialog on Win32 to show mainly Haml-related files
 if has("gui_win32")
-  let b:browsefilter="Haml Files (*.haml)\t*.haml\n" . s:browsefilter
+  let b:browsefilter="Haml Files (*.haml)\t*.haml\nSass Files (*.sass)\t*.sass\n" . s:browsefilter
 endif
 
 " Load the combined list of match_words for matchit.vim
@@ -78,7 +56,6 @@ if exists("loaded_matchit")
   let b:match_words = s:match_words
 endif
 
-"setlocal comments=f:/[,fb:/,fb:-#
 setlocal commentstring=-#\ %s
 
 let b:undo_ftplugin = "setl cms< com< "
@@ -86,4 +63,4 @@ let b:undo_ftplugin = "setl cms< com< "
 
 let &cpo = s:save_cpo
 
-" vim: nowrap sw=2 sts=2 ts=8 ff=unix:
+" vim:set sw=2:
