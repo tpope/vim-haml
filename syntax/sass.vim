@@ -4,7 +4,7 @@
 " Filenames:    *.sass
 
 if exists("b:current_syntax")
-    finish
+  finish
 endif
 
 runtime! syntax/css.vim
@@ -53,6 +53,4 @@ hi def link sassClass                   Type
 
 let b:current_syntax = "sass"
 
-"if main_syntax == 'css'
-  "unlet main_syntax
-"endif
+" vim:set sw=2:

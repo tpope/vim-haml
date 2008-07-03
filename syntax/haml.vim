@@ -4,7 +4,7 @@
 " Filenames:    *.haml
 
 if exists("b:current_syntax")
-    finish
+  finish
 endif
 
 if !exists("main_syntax")
@@ -82,4 +82,4 @@ hi def link hamlError                  Error
 
 let b:current_syntax = "haml"
 
-" vim:set sts=4 sw=4:
+" vim:set sw=2:
