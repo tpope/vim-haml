@@ -1,7 +1,7 @@
 " Vim indent file
 " Language:	HAML
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.info>
-" Last Change:	2007 Dec 16
+" Last Change:	2008 Sep 11
 
 if exists("b:did_indent")
   finish
@@ -55,7 +55,7 @@ function! GetHamlIndent()
     return increase
   elseif line =~ '^:'
     return increase
-  elseif line =~ '^'.s:tag.'[=~-]\s*\%(\%(if\|else\|elsif\|unless\|case\|when\|while\|until\|for\|begin\|module\|class\|def\)\>\%(.*\<end\>\)\@!\|.*do |[^|]*|\s*$\)'
+  elseif line =~ '^'.s:tag.'[=~-]\s*\%(\%(if\|else\|elsif\|unless\|case\|when\|while\|until\|for\|begin\|module\|class\|def\)\>\%(.*\<end\>\)\@!\|.*do\%(\s*|[^|]*|\)\=\s*$\)'
     return increase
   elseif line == '-#'
     return increase
