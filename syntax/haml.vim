@@ -49,19 +49,19 @@ syn match   hamlHelper  "\<action_view?\|\.\@<!\<\%(flatten\|open\|puts\)" conta
 syn keyword hamlHelper   capture_haml find_and_preserve  html_attrs init_haml_helpers list_of preced preserve succeed surround tab_down tab_up page_class contained containedin=@hamlEmbeddedRuby,@hamlRubyTop,rubyInterpolation
 
 syn cluster hamlHtmlTop contains=@htmlTop,htmlBold,htmlItalic,htmlUnderline
-syn region  hamlPlainFilter matchgroup=hamlFilter start="^\z(\s*\):\%(plain\|preserve\|erb\|redcloth\|textile\|markdown\)\s*$" end="^\%(\z1 \)\@!" contains=@hamlHtmlTop,rubyInterpolation
-syn region  hamlEscapedFilter matchgroup=hamlFilter start="^\z(\s*\):\%(escaped\)\s*$" end="^\%(\z1 \)\@!" contains=rubyInterpolation
-syn region  hamlErbFilter  matchgroup=hamlFilter start="^\z(\s*\):erb\s*$" end="^\%(\z1 \)\@!" contains=@hamlHtmlTop,hamlErbInterpolation
-syn region  hamlRubyFilter  matchgroup=hamlFilter start="^\z(\s*\):ruby\s*$" end="^\%(\z1 \)\@!" contains=@hamlRubyTop
-syn region  hamlJavascriptFilter matchgroup=hamlFilter start="^\z(\s*\):javascript\s*$" end="^\%(\z1 \)\@!" contains=@htmlJavaScript,rubyInterpolation keepend
-syn region  hamlSassFilter  matchgroup=hamlFilter start="^\z(\s*\):sass\s*$" end="^\%(\z1 \)\@!" contains=@hamlSassTop
+syn region  hamlPlainFilter      matchgroup=hamlFilter start="^\z(\s*\):\%(plain\|preserve\|redcloth\|textile\|markdown\)\s*$" end="^\%(\z1 \| *$\)\@!" contains=@hamlHtmlTop,rubyInterpolation
+syn region  hamlEscapedFilter    matchgroup=hamlFilter start="^\z(\s*\):escaped\s*$"    end="^\%(\z1 \| *$\)\@!" contains=rubyInterpolation
+syn region  hamlErbFilter        matchgroup=hamlFilter start="^\z(\s*\):erb\s*$"        end="^\%(\z1 \| *$\)\@!" contains=@hamlHtmlTop,hamlErbInterpolation
+syn region  hamlRubyFilter       matchgroup=hamlFilter start="^\z(\s*\):ruby\s*$"       end="^\%(\z1 \| *$\)\@!" contains=@hamlRubyTop
+syn region  hamlJavascriptFilter matchgroup=hamlFilter start="^\z(\s*\):javascript\s*$" end="^\%(\z1 \| *$\)\@!" contains=@htmlJavaScript,rubyInterpolation keepend
+syn region  hamlSassFilter       matchgroup=hamlFilter start="^\z(\s*\):sass\s*$"       end="^\%(\z1 \| *$\)\@!" contains=@hamlSassTop
 
-syn region  hamlJavascriptBlock start="^\z(\s*\)%script" nextgroup=@hamlComponent,hamlError end="^\%(\z1 \)\@!" contains=@hamlTop,@htmlJavaScript keepend
-syn region  hamlCssBlock        start="^\z(\s*\)%style" nextgroup=@hamlComponent,hamlError end="^\%(\z1 \)\@!" contains=@hamlTop,@htmlCss keepend
+syn region  hamlJavascriptBlock start="^\z(\s*\)%script" nextgroup=@hamlComponent,hamlError end="^\%(\z1 \| *$\)\@!" contains=@hamlTop,@htmlJavaScript keepend
+syn region  hamlCssBlock        start="^\z(\s*\)%style" nextgroup=@hamlComponent,hamlError  end="^\%(\z1 \| *$\)\@!" contains=@hamlTop,@htmlCss keepend
 syn match   hamlError "\$" contained
 
-syn region  hamlComment     start="^\z(\s*\)-#" end="^\%(\z1 \)\@!" contains=rubyTodo
-syn region  hamlHtmlComment start="^\z(\s*\)/" end="^\%(\z1 \)\@!" contains=@hamlTop,rubyTodo
+syn region  hamlComment     start="^\z(\s*\)-#" end="^\%(\z1 \| *$\)\@!" contains=rubyTodo
+syn region  hamlHtmlComment start="^\z(\s*\)/"  end="^\%(\z1 \| *$\)\@!" contains=@hamlTop,rubyTodo
 syn match   hamlIEConditional "\%(^\s*/\)\@<=\[if\>[^]]*]" contained containedin=hamlHtmlComment
 
 hi def link hamlSelfCloser             Special
