@@ -24,7 +24,7 @@ syn cluster hamlComponent    contains=hamlAttributes,hamlClassChar,hamlIdChar,ha
 syn cluster hamlEmbeddedRuby contains=hamlAttributes,hamlObject,hamlRuby,hamlRubyFilter
 syn cluster hamlTop          contains=hamlBegin,hamlPlainFilter,hamlRubyFilter,hamlSassFilter,hamlComment,hamlHtmlComment
 
-syn match   hamlBegin "^\s*\%([<>]\|&[^=~]\)\@!" nextgroup=hamlTag,hamlAttributes,hamlClassChar,hamlIdChar,hamlObject,hamlRuby,hamlPlainChar,hamlInterpolatable
+syn match   hamlBegin "^\s*\%([<>]\|&[^=~ ]\)\@!" nextgroup=hamlTag,hamlAttributes,hamlClassChar,hamlIdChar,hamlObject,hamlRuby,hamlPlainChar,hamlInterpolatable
 
 syn match   hamlTag        "%\w\+" contained contains=htmlTagName,htmlSpecialTagName nextgroup=@hamlComponent
 syn region  hamlAttributes matchgroup=hamlAttributesDelimiter start="{" end="}" contained contains=@hamlRubyTop nextgroup=@hamlComponent
@@ -40,9 +40,10 @@ syn region  hamlDocType start="^\s*!!!" end="$"
 syn region  hamlRuby   matchgroup=hamlRubyOutputChar start="[!&]\==\|\~" end="$" contained contains=@hamlRubyTop keepend
 syn region  hamlRuby   matchgroup=hamlRubyChar       start="-"           end="$" contained contains=@hamlRubyTop keepend
 syn match   hamlPlainChar "\\" contained
-syn region hamlInterpolatable matchgroup=hamlInterpolatableChar start="!\===" end="$" keepend contained contains=hamlInterpolation,@hamlHtmlTop
-syn region hamlInterpolatable matchgroup=hamlInterpolatableChar start="&=="   end="$" keepend contained contains=hamlInterpolation
-syn region hamlInterpolation matchgroup=hamlInterpolationDelimiter start="#{" end="}" contained contains=@hamlRubyTop
+syn region hamlInterpolatable matchgroup=hamlInterpolatableChar start="!\===\|!" end="$" keepend contained contains=hamlInterpolation,hamlInterpolationEscape,@hamlHtmlTop
+syn region hamlInterpolatable matchgroup=hamlInterpolatableChar start="&\%(==\)\="   end="$" keepend contained contains=hamlInterpolation,hamlInterpolationEscape
+syn region hamlInterpolation matchgroup=hamlInterpolationDelimiter start="#{" end="}" contains=@hamlRubyTop
+syn match  hamlInterpolationEscape "\\\@<!\%(\\\\\)*\\\%(\\\ze#{\|#\ze{\)"
 syn region hamlErbInterpolation matchgroup=hamlInterpolationDelimiter start="<%[=-]\=" end="-\=%>" contained contains=@hamlRubyTop
 
 syn match   hamlHelper  "\<action_view?\|\.\@<!\<\%(flatten\|open\|puts\)" contained containedin=@hamlEmbeddedRuby,@hamlRubyTop,rubyInterpolation
@@ -76,6 +77,7 @@ hi def link hamlInterpolatableChar     hamlRubyChar
 hi def link hamlRubyOutputChar         hamlRubyChar
 hi def link hamlRubyChar               Special
 hi def link hamlInterpolationDelimiter Delimiter
+hi def link hamlInterpolationEscape    Special
 hi def link hamlDocType                PreProc
 hi def link hamlFilter                 PreProc
 hi def link hamlAttributesDelimiter    Delimiter
