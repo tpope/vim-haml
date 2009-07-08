@@ -50,8 +50,8 @@ syn match   hamlHelper  "\<action_view?\|\.\@<!\<\%(flatten\|open\|puts\)" conta
 syn keyword hamlHelper   capture_haml find_and_preserve  html_attrs init_haml_helpers list_of preced preserve succeed surround tab_down tab_up page_class contained containedin=@hamlEmbeddedRuby,@hamlRubyTop,rubyInterpolation
 
 syn cluster hamlHtmlTop contains=@htmlTop,htmlBold,htmlItalic,htmlUnderline
-syn region  hamlPlainFilter      matchgroup=hamlFilter start="^\z(\s*\):\%(plain\|preserve\|redcloth\|textile\|markdown\)\s*$" end="^\%(\z1 \| *$\)\@!" contains=@hamlHtmlTop,rubyInterpolation
-syn region  hamlEscapedFilter    matchgroup=hamlFilter start="^\z(\s*\):escaped\s*$"    end="^\%(\z1 \| *$\)\@!" contains=rubyInterpolation
+syn region  hamlPlainFilter      matchgroup=hamlFilter start="^\z(\s*\):\%(plain\|preserve\|redcloth\|textile\|markdown\|maruku\)\s*$" end="^\%(\z1 \| *$\)\@!" contains=@hamlHtmlTop,rubyInterpolation
+syn region  hamlEscapedFilter    matchgroup=hamlFilter start="^\z(\s*\):\%(escaped\|cdata\)\s*$"    end="^\%(\z1 \| *$\)\@!" contains=rubyInterpolation
 syn region  hamlErbFilter        matchgroup=hamlFilter start="^\z(\s*\):erb\s*$"        end="^\%(\z1 \| *$\)\@!" contains=@hamlHtmlTop,hamlErbInterpolation
 syn region  hamlRubyFilter       matchgroup=hamlFilter start="^\z(\s*\):ruby\s*$"       end="^\%(\z1 \| *$\)\@!" contains=@hamlRubyTop
 syn region  hamlJavascriptFilter matchgroup=hamlFilter start="^\z(\s*\):javascript\s*$" end="^\%(\z1 \| *$\)\@!" contains=@htmlJavaScript,rubyInterpolation keepend
