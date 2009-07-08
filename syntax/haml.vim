@@ -46,8 +46,8 @@ syn region hamlInterpolation matchgroup=hamlInterpolationDelimiter start="#{" en
 syn match  hamlInterpolationEscape "\\\@<!\%(\\\\\)*\\\%(\\\ze#{\|#\ze{\)"
 syn region hamlErbInterpolation matchgroup=hamlInterpolationDelimiter start="<%[=-]\=" end="-\=%>" contained contains=@hamlRubyTop
 
-syn match   hamlHelper  "\<action_view?\|\.\@<!\<\%(flatten\|open\|puts\)" contained containedin=@hamlEmbeddedRuby,@hamlRubyTop,rubyInterpolation
-syn keyword hamlHelper   capture_haml find_and_preserve  html_attrs init_haml_helpers list_of preced preserve succeed surround tab_down tab_up page_class contained containedin=@hamlEmbeddedRuby,@hamlRubyTop,rubyInterpolation
+syn match   hamlHelper  "\<action_view?\|\<block_is_haml?\|\<is_haml?\|\.\@<!\<flatten" contained containedin=@hamlEmbeddedRuby,@hamlRubyTop,rubyInterpolation
+syn keyword hamlHelper   capture_haml escape_once find_and_preserve haml_concat haml_indent haml_tag html_attrs html_esape init_haml_helpers list_of non_haml precede preserve succeed surround tab_down tab_up page_class contained containedin=@hamlEmbeddedRuby,@hamlRubyTop,rubyInterpolation
 
 syn cluster hamlHtmlTop contains=@htmlTop,htmlBold,htmlItalic,htmlUnderline
 syn region  hamlPlainFilter      matchgroup=hamlFilter start="^\z(\s*\):\%(plain\|preserve\|redcloth\|textile\|markdown\|maruku\)\s*$" end="^\%(\z1 \| *$\)\@!" contains=@hamlHtmlTop,rubyInterpolation
