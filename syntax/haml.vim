@@ -41,8 +41,8 @@ syn region  hamlDocType start="^\s*!!!" end="$"
 syn region  hamlRuby   matchgroup=hamlRubyOutputChar start="[!&]\==\|\~" end="$" contained contains=@hamlRubyTop keepend
 syn region  hamlRuby   matchgroup=hamlRubyChar       start="-"           end="$" contained contains=@hamlRubyTop keepend
 syn match   hamlPlainChar "\\" contained
-syn region hamlInterpolatable matchgroup=hamlInterpolatableChar start="!\===\|!" end="$" keepend contained contains=hamlInterpolation,hamlInterpolationEscape,@hamlHtmlTop
-syn region hamlInterpolatable matchgroup=hamlInterpolatableChar start="&\%(==\)\="   end="$" keepend contained contains=hamlInterpolation,hamlInterpolationEscape
+syn region hamlInterpolatable matchgroup=hamlInterpolatableChar start="!\===\|!=\@!" end="$" keepend contained contains=hamlInterpolation,hamlInterpolationEscape,@hamlHtmlTop
+syn region hamlInterpolatable matchgroup=hamlInterpolatableChar start="&==\|&=\@!"   end="$" keepend contained contains=hamlInterpolation,hamlInterpolationEscape
 syn region hamlInterpolation matchgroup=hamlInterpolationDelimiter start="#{" end="}" contains=@hamlRubyTop
 syn match  hamlInterpolationEscape "\\\@<!\%(\\\\\)*\\\%(\\\ze#{\|#\ze{\)"
 syn region hamlErbInterpolation matchgroup=hamlInterpolationDelimiter start="<%[=-]\=" end="-\=%>" contained contains=@hamlRubyTop
