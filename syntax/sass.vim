@@ -32,6 +32,8 @@ syn match sassAmpersand  "&"
 " TODO: Arithmetic (including strings and concatenation)
 
 syn region sassInclude start="@import" end=";\|$" contains=cssComment,cssURL,cssUnicodeEscape,cssMediaType
+syn region sassControlLine matchgroup=sassControl start="@\%(if\|while\|for\)\>" end="$" contains=sassFor,@sassCssAttributes,sassConstant
+syn keyword sassFor from to through contained
 
 syn keyword sassTodo        FIXME NOTE TODO OPTIMIZE XXX contained
 syn region  sassComment     start="^\z(\s*\)//"  end="^\%(\z1 \)\@!" contains=sassTodo
@@ -44,6 +46,8 @@ hi def link sassMixing                  PreProc
 hi def link sassMixin                   PreProc
 hi def link sassTodo                    Todo
 hi def link sassInclude                 Include
+hi def link sassControl                 PreProc
+hi def link sassFor                     PreProc
 hi def link sassEscape                  Special
 hi def link sassIdChar                  Special
 hi def link sassClassChar               Special
