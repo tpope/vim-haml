@@ -100,4 +100,8 @@ hi def link hamlError                  Error
 
 let b:current_syntax = "haml"
 
+if main_syntax == "haml"
+  unlet main_syntax
+endif
+
 " vim:set sw=2:
