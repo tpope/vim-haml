@@ -32,7 +32,7 @@ syn match sassAmpersand  "&"
 " TODO: Arithmetic (including strings and concatenation)
 
 syn region sassInclude start="@import" end=";\|$" contains=cssComment,cssURL,cssUnicodeEscape,cssMediaType
-syn region sassControlLine matchgroup=sassControl start="@\%(if\|while\|for\)\>" end="$" contains=sassFor,@sassCssAttributes,sassConstant
+syn region sassControlLine matchgroup=sassControl start="@\%(if\|else\%(\s\+if\)\=\|while\|for\)\>" end="$" contains=sassFor,@sassCssAttributes,sassConstant
 syn keyword sassFor from to through contained
 
 syn keyword sassTodo        FIXME NOTE TODO OPTIMIZE XXX contained
