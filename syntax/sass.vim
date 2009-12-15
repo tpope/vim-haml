@@ -15,9 +15,11 @@ syn cluster sassCssProperties contains=cssFontProp,cssFontDescriptorProp,cssColo
 syn cluster sassCssAttributes contains=css.*Attr,cssComment,cssValue.*,cssColor,cssURL,cssImportant,cssError,cssStringQ,cssStringQQ,cssFunction,cssUnicodeEscape,cssRenderProp
 
 syn match sassProperty "^\s*\zs\s\%([[:alnum:]-]\+:\|:[[:alnum:]-]\+\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassCssAttribute
+syn match sassProperty "^\s*\zs\s\%(:\=[[:alnum:]-]\+\s*=\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassScript
 syn match sassCssAttribute ".*$" contained contains=@sassCssAttributes,sassConstant
+syn match sassScript ".*$" contained contains=@sassCssAttributes,sassConstant
 syn match sassConstant "![[:alnum:]_-]\+"
-syn match sassConstantAssignment "\%(![[:alnum:]_]\+\s*\)\@<==" nextgroup=sassCssAttribute skipwhite
+syn match sassConstantAssignment "\%(![[:alnum:]_]\+\s*\)\@<=\%(||\)\==" nextgroup=sassScript skipwhite
 syn match sassMixin  "^=.*"
 syn match sassMixing "^\s\+\zs+.*"
 
