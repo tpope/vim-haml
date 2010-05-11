@@ -16,7 +16,7 @@ setlocal indentkeys=o,O,*<Return>,},],0),!^F,=end,=else,=elsif,=rescue,=ensure,=
 
 " Only define the function once.
 if exists("*GetHamlIndent")
-  finish
+  " finish
 endif
 
 let s:attributes = '\%({.\{-\}}\|\[.\{-\}\]\)'
@@ -51,9 +51,11 @@ function! GetHamlIndent()
     return indent
   elseif line =~ '^/\%(\[[^]]*\]\)\=$'
     return increase
-  elseif line =~ '^:'
+  elseif group == 'hamlFilter'
     return increase
-  elseif line =~ '^'.s:tag.'[=~-]\s*\%(\%(if\|else\|elsif\|unless\|case\|when\|while\|until\|for\|begin\|module\|class\|def\)\>\%(.*\<end\>\)\@!\|.*do\%(\s*|[^|]*|\)\=\s*$\)'
+  elseif line =~ '^'.s:tag.'[&!]\=[=~-]\s*\%(\%(if\|else\|elsif\|unless\|case\|when\|while\|until\|for\|begin\|module\|class\|def\)\>\%(.*\<end\>\)\@!\|.*do\%(\s*|[^|]*|\)\=\s*$\)'
+    return increase
+  elseif line =~ '^'.s:tag.'[&!]\=[=~-].*,\s*$'
     return increase
   elseif line == '-#'
     return increase
