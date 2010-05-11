@@ -44,8 +44,6 @@ function! GetHamlIndent()
   if indent == indent(lnum)
     let indent = cindent <= indent ? -1 : increase
   endif
-  "let indent = indent == indent(lnum) ? -1 : indent
-  "let indent = indent > indent(lnum) + &sw ? indent(lnum) + &sw : indent
 
   let group = synIDattr(synID(lnum,lastcol,1),'name')
 
