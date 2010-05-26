@@ -18,8 +18,8 @@ syn match sassProperty "^\s*\zs\s\%([[:alnum:]-]\+:\|:[[:alnum:]-]\+\)"hs=s+1 co
 syn match sassProperty "^\s*\zs\s\%(:\=[[:alnum:]-]\+\s*=\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassScript
 syn match sassCssAttribute ".*$" contained contains=@sassCssAttributes,sassConstant
 syn match sassScript ".*$" contained contains=@sassCssAttributes,sassConstant
-syn match sassConstant "![[:alnum:]_-]\+"
-syn match sassConstantAssignment "\%(![[:alnum:]_]\+\s*\)\@<=\%(||\)\==" nextgroup=sassScript skipwhite
+syn match sassConstant "[!$][[:alnum:]_-]\+"
+syn match sassConstantAssignment "\%([!$][[:alnum:]_]\+\s*\)\@<=\%(||\)\==" nextgroup=sassScript skipwhite
 syn match sassMixin  "^=.*"
 syn match sassMixing "^\s\+\zs+.*"
 
