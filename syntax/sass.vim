@@ -12,13 +12,15 @@ runtime! syntax/css.vim
 syn case ignore
 
 syn cluster sassCssProperties contains=cssFontProp,cssFontDescriptorProp,cssColorProp,cssTextProp,cssBoxProp,cssGeneratedContentProp,cssPagingProp,cssUIProp,cssRenderProp,cssAuralProp,cssTableProp
-syn cluster sassCssAttributes contains=css.*Attr,cssComment,cssValue.*,cssColor,cssURL,cssImportant,cssError,cssStringQ,cssStringQQ,cssFunction,cssUnicodeEscape,cssRenderProp
+syn cluster sassCssAttributes contains=css.*Attr,cssComment,cssValue.*,cssColor,cssURL,sassDefault,cssImportant,cssError,cssStringQ,cssStringQQ,cssFunction,cssUnicodeEscape,cssRenderProp
 
 syn match sassProperty "^\s*\zs\s\%([[:alnum:]-]\+:\|:[[:alnum:]-]\+\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassCssAttribute
 syn match sassProperty "^\s*\zs\s\%(:\=[[:alnum:]-]\+\s*=\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassScript
 syn match sassCssAttribute ".*$" contained contains=@sassCssAttributes,sassConstant
 syn match sassScript ".*$" contained contains=@sassCssAttributes,sassConstant
-syn match sassConstant "[!$][[:alnum:]_-]\+"
+syn match sassDefault "!default\>" contained
+syn match sassConstant "!\%(important\>\|default\>\)\@![[:alnum:]_-]\+"
+syn match sassConstant "$[[:alnum:]_-]\+"
 syn match sassConstantAssignment "\%([!$][[:alnum:]_]\+\s*\)\@<=\%(||\)\==" nextgroup=sassScript skipwhite
 syn match sassMixin  "^=.*"
 syn match sassMixing "^\s\+\zs+.*"
@@ -44,6 +46,7 @@ syn region  sassCssComment  start="^\z(\s*\)/\*" end="^\%(\z1 \)\@!" contains=sa
 
 hi def link sassCssComment              sassComment
 hi def link sassComment                 Comment
+hi def link sassDefault                 cssImportant
 hi def link sassConstant                Identifier
 hi def link sassMixing                  PreProc
 hi def link sassMixin                   PreProc
