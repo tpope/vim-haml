@@ -15,13 +15,12 @@ syn cluster sassCssProperties contains=cssFontProp,cssFontDescriptorProp,cssColo
 syn cluster sassCssAttributes contains=css.*Attr,cssComment,cssValue.*,cssColor,cssURL,sassDefault,cssImportant,cssError,cssStringQ,cssStringQQ,cssFunction,cssUnicodeEscape,cssRenderProp
 
 syn match sassProperty "^\s*\zs\s\%([[:alnum:]-]\+:\|:[[:alnum:]-]\+\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassCssAttribute
-syn match sassProperty "^\s*\zs\s\%(:\=[[:alnum:]-]\+\s*=\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassScript
+syn match sassProperty "^\s*\zs\s\%(:\=[[:alnum:]-]\+\s*=\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassCssAttribute
 syn match sassCssAttribute ".*$" contained contains=@sassCssAttributes,sassConstant,sassFunction
-syn match sassScript ".*$" contained contains=@sassCssAttributes,sassConstant,sassFunction
 syn match sassDefault "!default\>" contained
 syn match sassConstant "!\%(important\>\|default\>\)\@![[:alnum:]_-]\+"
 syn match sassConstant "$[[:alnum:]_-]\+"
-syn match sassConstantAssignment "\%([!$][[:alnum:]_]\+\s*\)\@<=\%(||\)\==" nextgroup=sassScript skipwhite
+syn match sassConstantAssignment "\%([!$][[:alnum:]_]\+\s*\)\@<=\%(||\)\==" nextgroup=sassCssAttribute skipwhite
 
 syn match sassFunction "\<\%(rgb\|rgba\|red\|green\|blue\|mix\)\>(\@=" contained
 syn match sassFunction "\<\%(hsl\|hsla\|hue\|saturation\|lightness\|adjust-hue\|lighten\|darken\|saturate\|desaturate\|grayscale\|complement\)\>(\@=" contained
