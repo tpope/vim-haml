@@ -22,8 +22,13 @@ syn match sassDefault "!default\>" contained
 syn match sassConstant "!\%(important\>\|default\>\)\@![[:alnum:]_-]\+"
 syn match sassConstant "$[[:alnum:]_-]\+"
 syn match sassConstantAssignment "\%([!$][[:alnum:]_]\+\s*\)\@<=\%(||\)\==" nextgroup=sassScript skipwhite
-syn match sassMixin  "^=.*"
-syn match sassMixing "^\s\+\zs+.*"
+
+syn match sassMixinName "\w\+" contained
+syn match sassMixin  "^="               nextgroup=sassMixinName
+syn match sassMixin  "^@mixin"          nextgroup=sassMixinName skipwhite
+syn match sassMixing "^\s\+\zs+"        nextgroup=sassMixinName
+syn match sassMixing "^\s\+\zs@include" nextgroup=sassMixinName skipwhite
+syn match sassExtend "^\s\+\zs@extend"
 
 syn match sassEscape     "^\s*\zs\\"
 syn match sassIdChar     "#[[:alnum:]_-]\@=" nextgroup=sassId
@@ -50,6 +55,7 @@ hi def link sassDefault                 cssImportant
 hi def link sassConstant                Identifier
 hi def link sassMixing                  PreProc
 hi def link sassMixin                   PreProc
+hi def link sassExtend                  PreProc
 hi def link sassTodo                    Todo
 hi def link sassInclude                 Include
 hi def link sassDebug                   Debug
