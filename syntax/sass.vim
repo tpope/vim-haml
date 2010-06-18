@@ -16,14 +16,21 @@ syn cluster sassCssAttributes contains=css.*Attr,cssComment,cssValue.*,cssColor,
 
 syn match sassProperty "^\s*\zs\s\%([[:alnum:]-]\+:\|:[[:alnum:]-]\+\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassCssAttribute
 syn match sassProperty "^\s*\zs\s\%(:\=[[:alnum:]-]\+\s*=\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassScript
-syn match sassCssAttribute ".*$" contained contains=@sassCssAttributes,sassConstant
-syn match sassScript ".*$" contained contains=@sassCssAttributes,sassConstant
+syn match sassCssAttribute ".*$" contained contains=@sassCssAttributes,sassConstant,sassFunction
+syn match sassScript ".*$" contained contains=@sassCssAttributes,sassConstant,sassFunction
 syn match sassDefault "!default\>" contained
 syn match sassConstant "!\%(important\>\|default\>\)\@![[:alnum:]_-]\+"
 syn match sassConstant "$[[:alnum:]_-]\+"
 syn match sassConstantAssignment "\%([!$][[:alnum:]_]\+\s*\)\@<=\%(||\)\==" nextgroup=sassScript skipwhite
 
-syn match sassMixinName "\w\+" contained
+syn match sassFunction "\<\%(rgb\|rgba\|red\|green\|blue\|mix\)\>(\@=" contained
+syn match sassFunction "\<\%(hsl\|hsla\|hue\|saturation\|lightness\|adjust-hue\|lighten\|darken\|saturate\|desaturate\|grayscale\|complement\)\>(\@=" contained
+syn match sassFunction "\<\%(alpha\|opacity\|rgba\|opacify\|fade-in\|transparentize\|fade-out\)\>(\@=" contained
+syn match sassFunction "\<\%(unquote\|quote\)\>(\@=" contained
+syn match sassFunction "\<\%(percentage\|round\|ceil\|floor\|abs\)\>(\@=" contained
+syn match sassFunction "\<\%(type-of\|unit\|unitless\|comparable\)\>(\@=" contained
+
+syn match sassMixinName "\w\+" contained nextgroup=sassCssAttribute
 syn match sassMixin  "^="               nextgroup=sassMixinName
 syn match sassMixin  "^@mixin"          nextgroup=sassMixinName skipwhite
 syn match sassMixing "^\s\+\zs+"        nextgroup=sassMixinName
@@ -41,8 +48,8 @@ syn match sassAmpersand  "&"
 " TODO: Arithmetic (including strings and concatenation)
 
 syn region sassInclude start="@import" end=";\|$" contains=cssComment,cssURL,cssUnicodeEscape,cssMediaType
-syn region sassDebugLine matchgroup=sassDebug start="@debug\>" end="$" contains=@sassCssAttributes,sassConstant
-syn region sassControlLine matchgroup=sassControl start="@\%(if\|else\%(\s\+if\)\=\|while\|for\)\>" end="$" contains=sassFor,@sassCssAttributes,sassConstant
+syn region sassDebugLine matchgroup=sassDebug start="@debug\>" end="$" contains=@sassCssAttributes,sassConstant,sassFunction
+syn region sassControlLine matchgroup=sassControl start="@\%(if\|else\%(\s\+if\)\=\|while\|for\)\>" end="$" contains=sassFor,@sassCssAttributes,sassConstant,sassFunction
 syn keyword sassFor from to through contained
 
 syn keyword sassTodo        FIXME NOTE TODO OPTIMIZE XXX contained
@@ -53,6 +60,7 @@ hi def link sassCssComment              sassComment
 hi def link sassComment                 Comment
 hi def link sassDefault                 cssImportant
 hi def link sassConstant                Identifier
+hi def link sassFunction                Function
 hi def link sassMixing                  PreProc
 hi def link sassMixin                   PreProc
 hi def link sassExtend                  PreProc
