@@ -33,6 +33,8 @@ syn match sassFunction "\<\%(unquote\|quote\)\>(\@=" contained
 syn match sassFunction "\<\%(percentage\|round\|ceil\|floor\|abs\)\>(\@=" contained
 syn match sassFunction "\<\%(type-of\|unit\|unitless\|comparable\)\>(\@=" contained
 
+syn region sassInterpolation matchgroup=sassInterpolationDelimiter start="#{" end="}" contains=@sassCssAttributes,sassVariable,sassFunction
+
 syn match sassMixinName "[[:alnum:]_-]\+" contained nextgroup=sassCssAttribute
 syn match sassMixin  "^="               nextgroup=sassMixinName
 syn match sassMixin  "^@mixin"          nextgroup=sassMixinName skipwhite
@@ -75,6 +77,7 @@ hi def link sassFor                     PreProc
 hi def link sassEscape                  Special
 hi def link sassIdChar                  Special
 hi def link sassClassChar               Special
+hi def link sassInterpolationDelimiter  Delimiter
 hi def link sassAmpersand               Character
 hi def link sassId                      Identifier
 hi def link sassClass                   Type
