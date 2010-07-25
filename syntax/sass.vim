@@ -16,7 +16,7 @@ syn cluster sassCssAttributes contains=css.*Attr,cssComment,cssValue.*,cssColor,
 
 syn region sassDefinition matchgroup=cssBraces start="{" end="}" contains=TOP
 
-syn match sassProperty "\%([{;]\s*\|^\)\@<=[[:alnum:]-]\+:" contains=css.*Prop skipwhite nextgroup=sassCssAttribute contained containedin=sassDefinition
+syn match sassProperty "\%([{};]\s*\|^\)\@<=[[:alnum:]-]\+:" contains=css.*Prop skipwhite nextgroup=sassCssAttribute contained containedin=sassDefinition
 syn match sassProperty "^\s*\zs\s\%([[:alnum:]-]\+:\|:[[:alnum:]-]\+\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassCssAttribute
 syn match sassProperty "^\s*\zs\s\%(:\=[[:alnum:]-]\+\s*=\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassCssAttribute
 syn match sassCssAttribute +\%("\%([^"]\|\\"\)*"\|'\%([^']\|\\'\)*'\|[^;]\)*+ contained contains=@sassCssAttributes,sassVariable,sassFunction
@@ -37,9 +37,10 @@ syn region sassInterpolation matchgroup=sassInterpolationDelimiter start="#{" en
 
 syn match sassMixinName "[[:alnum:]_-]\+" contained nextgroup=sassCssAttribute
 syn match sassMixin  "^="               nextgroup=sassMixinName
-syn match sassMixin  "^@mixin"          nextgroup=sassMixinName skipwhite
+syn match sassMixin  "^\s*\zs@mixin"    nextgroup=sassMixinName skipwhite
 syn match sassMixing "^\s\+\zs+"        nextgroup=sassMixinName
 syn match sassMixing "^\s\+\zs@include" nextgroup=sassMixinName skipwhite
+syn match sassMixing "\%([{};]\s*\|^\)\@<=@include" nextgroup=sassMixinName skipwhite contained containedin=sassDefinition
 syn match sassExtend "^\s\+\zs@extend"
 
 syn match sassEscape     "^\s*\zs\\"
@@ -54,7 +55,7 @@ syn match sassAmpersand  "&"
 
 syn region sassInclude start="@import" end=";\|$" contains=cssComment,cssURL,cssUnicodeEscape,cssMediaType
 syn region sassDebugLine matchgroup=sassDebug start="@debug\>" end="$" contains=@sassCssAttributes,sassVariable,sassFunction
-syn region sassControlLine matchgroup=sassControl start="@\%(if\|else\%(\s\+if\)\=\|while\|for\)\>" end="$" contains=sassFor,@sassCssAttributes,sassVariable,sassFunction
+syn region sassControlLine matchgroup=sassControl start="@\%(if\|else\%(\s\+if\)\=\|while\|for\)\>" end="[{};]\@=\|$" contains=sassFor,@sassCssAttributes,sassVariable,sassFunction
 syn keyword sassFor from to through contained
 
 syn keyword sassTodo        FIXME NOTE TODO OPTIMIZE XXX contained
