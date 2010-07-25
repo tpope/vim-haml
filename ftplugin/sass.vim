@@ -13,7 +13,7 @@ let b:undo_ftplugin = "setl cms< inc< inex< ofu< sua<"
 setlocal commentstring=//\ %s
 setlocal includeexpr=substitute(v:fname,'\\%(.*/\\\|^\\)\\zs','_','')
 setlocal omnifunc=csscomplete#CompleteCSS
-setlocal suffixesadd=.css,.sass,.scss
+setlocal suffixesadd=.sass,.scss,.css
 
 let &l:include = '^\s*@import\s\+\%(url(\)\=["'']\='
 
