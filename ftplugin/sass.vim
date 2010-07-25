@@ -13,6 +13,6 @@ let b:undo_ftplugin = "setl cms< inc< ofu<"
 setlocal commentstring=//\ %s
 setlocal omnifunc=csscomplete#CompleteCSS
 
-let &l:include = '^\s*@import\s\+\%(url(\)\='
+let &l:include = '^\s*@import\s\+\%(url(\)\=["'']\='
 
 " vim:set sw=2:
