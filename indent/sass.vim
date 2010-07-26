@@ -1,7 +1,7 @@
 " Vim indent file
 " Language:	Sass
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
-" Last Change:	2007 Dec 16
+" Last Change:	2010 May 21
 
 if exists("b:did_indent")
   finish

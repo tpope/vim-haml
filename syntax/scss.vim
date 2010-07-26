@@ -1,7 +1,8 @@
 " Vim syntax file
-" Language:     SCSS
-" Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
-" Filenames:    *.scss
+" Language:	SCSS
+" Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
+" Filenames:	*.scss
+" Last Change:	2010 Jul 26
 
 if exists("b:current_syntax")
   finish

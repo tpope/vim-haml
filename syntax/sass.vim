@@ -1,7 +1,8 @@
 " Vim syntax file
-" Language:     Sass
-" Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
-" Filenames:    *.sass
+" Language:	Sass
+" Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
+" Filenames:	*.sass
+" Last Change:	2010 Jul 26
 
 if exists("b:current_syntax")
   finish

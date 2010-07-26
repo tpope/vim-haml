@@ -1,7 +1,8 @@
 " Vim syntax file
-" Language:     Haml
-" Maintainer:   Tim Pope <vimNOSPAM@tpope.org>
-" Filenames:    *.haml
+" Language:	Haml
+" Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
+" Filenames:	*.haml
+" Last Change:	2010 Jul 26
 
 if exists("b:current_syntax")
   finish
