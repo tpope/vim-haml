@@ -2,7 +2,7 @@
 " Language:	Sass
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
 " Filenames:	*.sass
-" Last Change:	2010 Jul 28
+" Last Change:	2010 Aug 09
 
 if exists("b:current_syntax")
   finish
