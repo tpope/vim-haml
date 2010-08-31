@@ -3,6 +3,12 @@ files = [
   "ftplugin/haml.vim",
   "ftplugin/sass.vim",
   "ftplugin/scss.vim",
+  "indent/haml.vim",
+  "indent/sass.vim",
+  "indent/scss.vim",
+  "syntax/haml.vim",
+  "syntax/sass.vim",
+  "syntax/scss.vim",
 ]
 
 desc "Install"
