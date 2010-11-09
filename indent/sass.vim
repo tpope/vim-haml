@@ -18,7 +18,7 @@ if exists("*GetSassIndent")
 endif
 
 let s:property = '^\s*:\|^\s*[[:alnum:]#{}-]\+\%(:\|\s*=\)'
-let s:extend = '^\s*\%(@extend\|+\)'
+let s:extend = '^\s*\%(@extend\|@include\|+\)'
 
 function! GetSassIndent()
   let lnum = prevnonblank(v:lnum-1)
