@@ -10,7 +10,6 @@ let b:did_indent = 1
 
 setlocal indentexpr=GetSCSSIndent()
 setlocal indentkeys=0{,0},!^F,o,O
-setlocal nosmartindent
 
 if exists("*GetSCSSIndent")
   finish
