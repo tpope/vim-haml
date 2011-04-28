@@ -37,7 +37,7 @@ syn match sassFunction "\<\%(type-of\|unit\|unitless\|comparable\)\>(\@=" contai
 syn region sassInterpolation matchgroup=sassInterpolationDelimiter start="#{" end="}" contains=@sassCssAttributes,sassVariable,sassFunction containedin=cssStringQ,cssStringQQ,sassProperty
 
 syn match sassMixinName "[[:alnum:]_-]\+" contained nextgroup=sassCssAttribute
-syn match sassMixin  "^="               nextgroup=sassMixinName
+syn match sassMixin  "^="               nextgroup=sassMixinName skipwhite
 syn match sassMixin  "\%([{};]\s*\|^\s*\)\@<=@mixin"   nextgroup=sassMixinName skipwhite
 syn match sassMixing "^\s\+\zs+"        nextgroup=sassMixinName
 syn match sassMixing "\%([{};]\s*\|^\s*\)\@<=@include" nextgroup=sassMixinName skipwhite
