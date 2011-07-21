@@ -29,7 +29,7 @@ then
 else
 
 	echo "Cloning vim-haml"
-	git clone --depth=1 git://github.com/anirudhjoshi/vim-haml.git
+	git clone --depth=1 git://github.com/tpope/vim-haml.git
 
 fi
 
