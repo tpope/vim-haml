@@ -17,7 +17,7 @@ task :install do
   vimfiles ||= File.expand_path("~/vimfiles") if RUBY_PLATFORM =~ /(win|w)32$/
   vimfiles ||= File.expand_path("~/.vim")
 
-  puts "Installing rails.vim"
+  puts "Installing haml.vim"
   files.each do |file|
     target_file = File.join(vimfiles, file)
     FileUtils.mkdir_p(File.dirname(target_file))
