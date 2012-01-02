@@ -34,7 +34,7 @@ syn match sassFunction "\<\%(unquote\|quote\)\>(\@=" contained
 syn match sassFunction "\<\%(percentage\|round\|ceil\|floor\|abs\)\>(\@=" contained
 syn match sassFunction "\<\%(type-of\|unit\|unitless\|comparable\)\>(\@=" contained
 
-syn region sassInterpolation matchgroup=sassInterpolationDelimiter start="#{" end="}" contains=@sassCssAttributes,sassVariable,sassFunction containedin=cssStringQ,cssStringQQ,sassProperty
+syn region sassInterpolation matchgroup=sassInterpolationDelimiter start="#{" end="}" contains=@sassCssAttributes,sassVariable,sassFunction containedin=cssStringQ,cssStringQQ,cssPseudoClass,sassProperty
 
 syn match sassMixinName "[[:alnum:]_-]\+" contained nextgroup=sassCssAttribute
 syn match sassMixin  "^="               nextgroup=sassMixinName skipwhite
