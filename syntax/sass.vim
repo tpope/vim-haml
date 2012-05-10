@@ -26,13 +26,7 @@ syn match sassVariable "!\%(important\>\|default\>\)\@![[:alnum:]_-]\+"
 syn match sassVariable "$[[:alnum:]_-]\+"
 syn match sassVariableAssignment "\%([!$][[:alnum:]_-]\+\s*\)\@<=\%(||\)\==" nextgroup=sassCssAttribute skipwhite
 syn match sassVariableAssignment "\%([!$][[:alnum:]_-]\+\s*\)\@<=:" nextgroup=sassCssAttribute skipwhite
-
-syn match sassFunction "\<\%(rgb\|rgba\|red\|green\|blue\|mix\)\>(\@=" contained
-syn match sassFunction "\<\%(hsl\|hsla\|hue\|saturation\|lightness\|adjust-hue\|lighten\|darken\|saturate\|desaturate\|grayscale\|complement\)\>(\@=" contained
-syn match sassFunction "\<\%(alpha\|opacity\|rgba\|opacify\|fade-in\|transparentize\|fade-out\)\>(\@=" contained
-syn match sassFunction "\<\%(unquote\|quote\)\>(\@=" contained
-syn match sassFunction "\<\%(percentage\|round\|ceil\|floor\|abs\)\>(\@=" contained
-syn match sassFunction "\<\%(type-of\|unit\|unitless\|comparable\)\>(\@=" contained
+syn match sassFunction "\<[[:alnum:]_-]\+\>(\@=" contained
 
 syn region sassInterpolation matchgroup=sassInterpolationDelimiter start="#{" end="}" contains=@sassCssAttributes,sassVariable,sassFunction containedin=cssStringQ,cssStringQQ,cssPseudoClass,sassProperty
 
