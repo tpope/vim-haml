@@ -2,7 +2,7 @@
 " Language:	SCSS
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
 " Filenames:	*.scss
-" Last Change:	2010 Jul 26
+" Last Change:	2012 Jul 12
 
 if exists("b:current_syntax")
   finish
@@ -10,8 +10,8 @@ endif
 
 runtime! syntax/sass.vim
 
-syn match scssComment "//.*" contains=sassTodo,@Spell
-syn region scssComment start="/\*" end="\*/" contains=sassTodo,@Spell
+syn match scssComment "//.*$" contains=sassTodo,@Spell
+syn region scssComment start="^/\*" end="\*/$" contains=sassTodo,@Spell
 
 hi def link scssComment sassComment
 
