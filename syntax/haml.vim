@@ -59,13 +59,13 @@ syn match   hamlHelper  "\<action_view?\|\<block_is_haml?\|\<is_haml?\|\.\@<!\<f
 syn keyword hamlHelper   capture_haml escape_once find_and_preserve haml_concat haml_indent haml_tag html_attrs html_esape init_haml_helpers list_of non_haml precede preserve succeed surround tab_down tab_up page_class contained containedin=@hamlEmbeddedRuby,@hamlRubyTop
 
 syn cluster hamlHtmlTop contains=@htmlTop,htmlBold,htmlItalic,htmlUnderline
-syn region  hamlPlainFilter      matchgroup=hamlFilter start="^\z(\s*\):\%(plain\|preserve\|redcloth\|textile\|markdown\|maruku\)\s*$" end="^\%(\z1 \| *$\)\@!" contains=@hamlHtmlTop,hamlInterpolation
-syn region  hamlEscapedFilter    matchgroup=hamlFilter start="^\z(\s*\):\%(escaped\|cdata\)\s*$"    end="^\%(\z1 \| *$\)\@!" contains=hamlInterpolation
-syn region  hamlErbFilter        matchgroup=hamlFilter start="^\z(\s*\):erb\s*$"        end="^\%(\z1 \| *$\)\@!" contains=@hamlHtmlTop,hamlErbInterpolation
-syn region  hamlRubyFilter       matchgroup=hamlFilter start="^\z(\s*\):ruby\s*$"       end="^\%(\z1 \| *$\)\@!" contains=@hamlRubyTop
-syn region  hamlJavascriptFilter matchgroup=hamlFilter start="^\z(\s*\):javascript\s*$" end="^\%(\z1 \| *$\)\@!" contains=@htmlJavaScript,hamlInterpolation keepend
-syn region  hamlCSSFilter        matchgroup=hamlFilter start="^\z(\s*\):css\s*$"        end="^\%(\z1 \| *$\)\@!" contains=@htmlCss,hamlInterpolation keepend
-syn region  hamlSassFilter       matchgroup=hamlFilter start="^\z(\s*\):sass\s*$"       end="^\%(\z1 \| *$\)\@!" contains=@hamlSassTop
+syn region  hamlPlainFilter        matchgroup=hamlFilter start="^\z(\s*\):\%(plain\|preserve\|redcloth\|textile\|markdown\|maruku\)\s*$" end="^\%(\z1 \| *$\)\@!" contains=@hamlHtmlTop,hamlInterpolation
+syn region  hamlEscapedFilter      matchgroup=hamlFilter start="^\z(\s*\):\%(escaped\|cdata\)\s*$"  end="^\%(\z1 \| *$\)\@!" contains=hamlInterpolation
+syn region  hamlErbFilter          matchgroup=hamlFilter start="^\z(\s*\):erb\s*$"                  end="^\%(\z1 \| *$\)\@!" contains=@hamlHtmlTop,hamlErbInterpolation
+syn region  hamlRubyFilter         matchgroup=hamlFilter start="^\z(\s*\):ruby\s*$"                 end="^\%(\z1 \| *$\)\@!" contains=@hamlRubyTop
+syn region  hamlJavascriptFilter   matchgroup=hamlFilter start="^\z(\s*\):javascript\s*$"           end="^\%(\z1 \| *$\)\@!" contains=@htmlJavaScript,hamlInterpolation keepend
+syn region  hamlCSSFilter          matchgroup=hamlFilter start="^\z(\s*\):css\s*$"                  end="^\%(\z1 \| *$\)\@!" contains=@htmlCss,hamlInterpolation keepend
+syn region  hamlSassFilter         matchgroup=hamlFilter start="^\z(\s*\):sass\s*$"                 end="^\%(\z1 \| *$\)\@!" contains=@hamlSassTop
 syn region  hamlCoffeescriptFilter matchgroup=hamlFilter start="^\z(\s*\):coffeescript\s*$"         end="^\%(\z1 \| *$\)\@!" contains=@coffee
 
 syn region  hamlJavascriptBlock start="^\z(\s*\)%script" nextgroup=@hamlComponent,hamlError end="^\%(\z1 \| *$\)\@!" contains=@hamlTop,@htmlJavaScript keepend
