@@ -66,6 +66,7 @@ syn region  hamlRubyFilter       matchgroup=hamlFilter start="^\z(\s*\):ruby\s*$
 syn region  hamlJavascriptFilter matchgroup=hamlFilter start="^\z(\s*\):javascript\s*$" end="^\%(\z1 \| *$\)\@!" contains=@htmlJavaScript,hamlInterpolation keepend
 syn region  hamlCSSFilter        matchgroup=hamlFilter start="^\z(\s*\):css\s*$"        end="^\%(\z1 \| *$\)\@!" contains=@htmlCss,hamlInterpolation keepend
 syn region  hamlSassFilter       matchgroup=hamlFilter start="^\z(\s*\):sass\s*$"       end="^\%(\z1 \| *$\)\@!" contains=@hamlSassTop
+syn region  hamlCoffeescriptFilter matchgroup=hamlFilter start="^\z(\s*\):coffeescript\s*$"         end="^\%(\z1 \| *$\)\@!" contains=@coffee
 
 syn region  hamlJavascriptBlock start="^\z(\s*\)%script" nextgroup=@hamlComponent,hamlError end="^\%(\z1 \| *$\)\@!" contains=@hamlTop,@htmlJavaScript keepend
 syn region  hamlCssBlock        start="^\z(\s*\)%style" nextgroup=@hamlComponent,hamlError  end="^\%(\z1 \| *$\)\@!" contains=@hamlTop,@htmlCss keepend
