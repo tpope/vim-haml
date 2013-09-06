@@ -15,7 +15,10 @@ endif
 let s:cpo_save = &cpo
 set cpo-=C
 
-CompilerSet makeprg=haml\ -c
+execute "CompilerSet makeprg=haml\\ -q\\ --unix-newlines\\ ".
+\        "$*\\ ".
+\        fnameescape(expand("%"))."\\ ".
+\        fnameescape(expand("%:r")).".html"
 
 CompilerSet errorformat=
       \Haml\ %trror\ on\ line\ %l:\ %m,

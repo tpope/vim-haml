@@ -15,7 +15,10 @@ endif
 let s:cpo_save = &cpo
 set cpo-=C
 
-CompilerSet makeprg=sass\ -c
+execute "CompilerSet makeprg=sass\\ --no-cache\\ --unix-newlines\\ ".
+\        "$*\\ ".
+\        fnameescape(expand("%"))."\\ ".
+\        fnameescape(expand("%:r")).".css"
 
 CompilerSet errorformat=
       \%f:%l:%m\ (Sass::Syntax%trror),
