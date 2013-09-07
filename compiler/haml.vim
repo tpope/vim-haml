@@ -15,10 +15,19 @@ endif
 let s:cpo_save = &cpo
 set cpo-=C
 
-execute "CompilerSet makeprg=haml\\ -q\\ --unix-newlines\\ ".
-\        "$*\\ ".
-\        fnameescape(expand("%"))."\\ ".
-\        fnameescape(expand("%:r")).".html"
+if !exists("g:haml_make_options")
+  let g:haml_make_options = "-q --unix-newlines"
+endif
+
+if exists("g:really_compile_haml")
+  execute "CompilerSet makeprg=haml\\ " .
+  \        escape(g:haml_make_options, " ") . "\\ " .
+  \        "$*\\ " .
+  \        fnameescape(expand("%")) . "\\ " .
+  \        fnameescape(expand("%:r")) . ".html"
+else
+  CompilerSet makeprg=haml\ -c
+endif
 
 CompilerSet errorformat=
       \Haml\ %trror\ on\ line\ %l:\ %m,
