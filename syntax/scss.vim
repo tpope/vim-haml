@@ -12,6 +12,7 @@ runtime! syntax/sass.vim
 
 syn match scssComment "//.*" contains=sassTodo,@Spell
 syn region scssComment start="/\*" end="\*/" contains=sassTodo,@Spell
+syn region scssInclude start="@import" end=";\|$" contains=cssURL,cssUnicodeEscape,cssMediaType
 
 hi def link scssComment sassComment
 
