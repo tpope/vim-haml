@@ -37,7 +37,16 @@ function! GetHamlIndent()
   let line = substitute(line,'^\s\+','','')
   let indent = indent(lnum)
   let cindent = indent(v:lnum)
-  if cline =~# '\v^-\s*%(elsif|else|when)>'
+
+  if b:haml_variant == 'hamljs'
+    let outdent_atoms = '}'
+    let haml_statement = '^'.s:tag.'[&!]\=[=~-]\s*}\?\s*\%(\%(if\|else\|else if\|for\)\>\)'
+  else
+    let outdent_atoms = 'elsif\|else\|when'
+    let haml_statement = '^'.s:tag.'[&!]\=[=~-]\s*\%(\%(if\|else\|elsif\|unless\|case\|when\|while\|until\|for\|begin\|module\|class\|def\)\>\%(.*\<end\>\)\@!\|.*do\%(\s*|[^|]*|\)\=\s*$\)'
+  endif
+
+  if cline =~# '^-\s*\('.outdent_atoms.'\)'
     let indent = cindent < indent ? cindent : indent - &sw
   endif
   let increase = indent + &sw
@@ -53,7 +62,7 @@ function! GetHamlIndent()
     return increase
   elseif group == 'hamlFilter'
     return increase
-  elseif line =~ '^'.s:tag.'[&!]\=[=~-]\s*\%(\%(if\|else\|elsif\|unless\|case\|when\|while\|until\|for\|begin\|module\|class\|def\)\>\%(.*\<end\>\)\@!\|.*do\%(\s*|[^|]*|\)\=\s*$\)'
+  elseif line =~ haml_statement
     return increase
   elseif line =~ '^'.s:tag.'[&!]\=[=~-].*,\s*$'
     return increase
