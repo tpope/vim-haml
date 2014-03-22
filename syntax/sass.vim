@@ -83,7 +83,7 @@ hi def link sassExtend                  PreProc
 hi def link sassFunctionDecl            PreProc
 hi def link sassReturn                  PreProc
 hi def link sassTodo                    Todo
-hi def link sassCharset                 Include
+hi def link sassCharset                 PreProc
 hi def link sassInclude                 Include
 hi def link sassDebug                   sassControl
 hi def link sassWarn                    sassControl
