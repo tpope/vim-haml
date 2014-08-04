@@ -21,8 +21,9 @@ syn match sassProperty "\%([{};]\s*\|^\)\@<=\%([[:alnum:]-]\|#{[^{}]*}\)\+\s*:" 
 syn match sassProperty "^\s*\zs\s\%(\%([[:alnum:]-]\|#{[^{}]*}\)\+\s*:\|:[[:alnum:]-]\+\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassCssAttribute
 syn match sassProperty "^\s*\zs\s\%(:\=[[:alnum:]-]\+\s*=\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassCssAttribute
 syn match sassCssAttribute +\%("\%([^"]\|\\"\)*"\|'\%([^']\|\\'\)*'\|#{[^{}]*}\|[^{};]\)*+ contained contains=@sassCssAttributes,sassVariable,sassFunction,sassInterpolation
+syn match sassGlobal "!global\>" contained
 syn match sassDefault "!default\>" contained
-syn match sassVariable "!\%(important\>\|default\>\)\@![[:alnum:]_-]\+"
+syn match sassVariable "!\%(important\>\|global\|default\>\)\@![[:alnum:]_-]\+"
 syn match sassVariable "$[[:alnum:]_-]\+"
 syn match sassVariableAssignment "\%([!$][[:alnum:]_-]\+\s*\)\@<=\%(||\)\==" nextgroup=sassCssAttribute skipwhite
 syn match sassVariableAssignment "\%([!$][[:alnum:]_-]\+\s*\)\@<=:" nextgroup=sassCssAttribute skipwhite
@@ -48,6 +49,7 @@ syn match sassMixing "^\s\+\zs+"        nextgroup=sassMixinName
 syn match sassMixing "\%([{};]\s*\|^\s*\)\@<=@include" nextgroup=sassMixinName skipwhite
 syn match sassExtend "\%([{};]\s*\|^\s*\)\@<=@extend"
 syn match sassPlaceholder "\%([{};]\s*\|^\s*\)\@<=%"   nextgroup=sassMixinName skipwhite
+syn match sassOptional "!optional\>" contained
 
 syn match sassFunctionName "[[:alnum:]_-]\+" contained nextgroup=sassCssAttribute
 syn match sassFunctionDecl "\%([{};]\s*\|^\s*\)\@<=@function"   nextgroup=sassFunctionName skipwhite
@@ -80,11 +82,13 @@ syn match   sassEndOfLineComment "//.*" contains=sassComment,sassTodo,@Spell
 hi def link sassEndOfLineComment        sassComment
 hi def link sassCssComment              sassComment
 hi def link sassComment                 Comment
+hi def link sassGlobal                  cssImportant
 hi def link sassDefault                 cssImportant
 hi def link sassVariable                Identifier
 hi def link sassFunction                Function
 hi def link sassMixing                  PreProc
 hi def link sassMixin                   PreProc
+hi def link sassOptional                cssImportant
 hi def link sassPlaceholder             PreProc
 hi def link sassExtend                  PreProc
 hi def link sassFunctionDecl            PreProc
