@@ -47,9 +47,11 @@ syn match sassMixin  "^="               nextgroup=sassMixinName skipwhite
 syn match sassMixin  "\%([{};]\s*\|^\s*\)\@<=@mixin"   nextgroup=sassMixinName skipwhite
 syn match sassMixing "^\s\+\zs+"        nextgroup=sassMixinName
 syn match sassMixing "\%([{};]\s*\|^\s*\)\@<=@include" nextgroup=sassMixinName skipwhite
+syn match sassContent "\%([{};]\s*\|^\s*\)\@<=@content"
 syn match sassExtend "\%([{};]\s*\|^\s*\)\@<=@extend"
 syn match sassPlaceholder "\%([{};]\s*\|^\s*\)\@<=%"   nextgroup=sassMixinName skipwhite
 syn match sassOptional "!optional\>" contained
+syn match sassAtRoot "\%([{};]\s*\|^\s*\)\@<=@at-root"
 
 syn match sassFunctionName "[[:alnum:]_-]\+" contained nextgroup=sassCssAttribute
 syn match sassFunctionDecl "\%([{};]\s*\|^\s*\)\@<=@function"   nextgroup=sassFunctionName skipwhite
@@ -71,6 +73,7 @@ syn region sassCharset start="@charset" end=";\|$" contains=scssComment,cssStrin
 syn region sassInclude start="@import" end=";\|$" contains=scssComment,cssStringQ,cssStringQQ,cssURL,cssUnicodeEscape,cssMediaType
 syn region sassDebugLine end=";\|$" matchgroup=sassDebug start="@debug\>" contains=@sassCssAttributes,sassVariable,sassFunction
 syn region sassWarnLine end=";\|$" matchgroup=sassWarn start="@warn\>" contains=@sassCssAttributes,sassVariable,sassFunction
+syn region sassErrorLine end=";\|$" matchgroup=sassError start="@error\>" contains=@sassCssAttributes,sassVariable,sassFunction
 syn region sassControlLine matchgroup=sassControl start="@\%(if\|else\%(\s\+if\)\=\|while\|for\|each\)\>" end="[{};]\@=\|$" contains=sassFor,@sassCssAttributes,sassVariable,sassFunction
 syn keyword sassFor from to through in contained
 
@@ -86,11 +89,13 @@ hi def link sassGlobal                  cssImportant
 hi def link sassDefault                 cssImportant
 hi def link sassVariable                Identifier
 hi def link sassFunction                Function
+hi def link sassContent                 PreProc
 hi def link sassMixing                  PreProc
 hi def link sassMixin                   PreProc
 hi def link sassOptional                cssImportant
 hi def link sassPlaceholder             PreProc
 hi def link sassExtend                  PreProc
+hi def link sassAtRoot                  PreProc
 hi def link sassFunctionDecl            PreProc
 hi def link sassReturn                  PreProc
 hi def link sassTodo                    Todo
@@ -100,6 +105,7 @@ hi def link sassMediaOperators          PreProc
 hi def link sassInclude                 Include
 hi def link sassDebug                   sassControl
 hi def link sassWarn                    sassControl
+hi def link sassError                   sassControl
 hi def link sassControl                 PreProc
 hi def link sassFor                     PreProc
 hi def link sassEscape                  Special
