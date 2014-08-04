@@ -28,11 +28,16 @@ syn match sassVariableAssignment "\%([!$][[:alnum:]_-]\+\s*\)\@<=\%(||\)\==" nex
 syn match sassVariableAssignment "\%([!$][[:alnum:]_-]\+\s*\)\@<=:" nextgroup=sassCssAttribute skipwhite
 
 syn match sassFunction "\<\%(rgb\|rgba\|red\|green\|blue\|mix\)\>(\@=" contained
-syn match sassFunction "\<\%(hsl\|hsla\|hue\|saturation\|lightness\|adjust-hue\|lighten\|darken\|saturate\|desaturate\|grayscale\|complement\)\>(\@=" contained
+syn match sassFunction "\<\%(hsl\|hsla\|hue\|saturation\|lightness\|adjust-hue\|lighten\|darken\|saturate\|desaturate\|grayscale\|complement\|invert\)\>(\@=" contained
 syn match sassFunction "\<\%(alpha\|opacity\|rgba\|opacify\|fade-in\|transparentize\|fade-out\)\>(\@=" contained
-syn match sassFunction "\<\%(unquote\|quote\)\>(\@=" contained
-syn match sassFunction "\<\%(percentage\|round\|ceil\|floor\|abs\)\>(\@=" contained
-syn match sassFunction "\<\%(type-of\|unit\|unitless\|comparable\)\>(\@=" contained
+syn match sassFunction "\<\%(adjust-color\|scale-color\|change-color\|ie-hex-str\)\>(\@=" contained
+syn match sassFunction "\<\%(unquote\|quote\|str-length\|str-insert\|str-index\|str-slice\|to-upper-case\|to-lower-case\)\>(\@=" contained
+syn match sassFunction "\<\%(percentage\|round\|ceil\|floor\|abs\|min\|max\|random\)\>(\@=" contained
+syn match sassFunction "\<\%(length\|nth\|join\|append\|zip\|index\|list-seperator\)\>(\@=" contained
+syn match sassFunction "\<\%(map-\(get\|merge\|remove\|keys\|values\|has-keys\)\|keywords\)\>(\@=" contained
+syn match sassFunction "\<\%(selector-\(nest\|append\|extend\|replace\|unify\)\|is-superselector\|simple-selectors\|selector-parse\)\>(\@=" contained
+syn match sassFunction "\<\%(feature-exists\|variable-exists\|global-variable-exists\|function-exists\|mixin-exists\|inspect\|type-of\|unit\|unitless\|comparable\|call\)\>(\@=" contained
+syn match sassFunction "\<\%(if\|unique-id\)\>(\@=" contained
 
 syn region sassInterpolation matchgroup=sassInterpolationDelimiter start="#{" end="}" contains=@sassCssAttributes,sassVariable,sassFunction containedin=cssStringQ,cssStringQQ,cssPseudoClass,sassProperty
 
