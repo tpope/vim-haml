@@ -29,7 +29,7 @@ function! GetSassIndent()
   let indent = indent(lnum)
   let cindent = indent(v:lnum)
   if line !~ s:property && line !~ s:extend && cline =~ s:property
-    return indent + &sw
+    return indent + (exists('*shiftwidth') ? shiftwidth() : &sw)
   else
     return -1
   endif
