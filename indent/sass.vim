@@ -30,8 +30,6 @@ function! GetSassIndent()
   let cindent = indent(v:lnum)
   if line !~ s:property && line !~ s:extend && cline =~ s:property
     return indent + &sw
-  "elseif line =~ s:property && cline !~ s:property
-    "return indent - &sw
   else
     return -1
   endif
