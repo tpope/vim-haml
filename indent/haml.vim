@@ -26,6 +26,18 @@ if !exists('g:haml_self_closing_tags')
   let g:haml_self_closing_tags = 'base|link|meta|br|hr|img|input'
 endif
 
+" The shiftwidth() exists since patch 7.3.694
+" Don't require it to exist.
+if exists('*shiftwidth')
+  function s:sw() abort
+    return shiftwidth()
+  endfunction
+else
+  function s:sw() abort
+    return &shiftwidth
+  endfunction
+endif
+
 function! GetHamlIndent()
   let lnum = prevnonblank(v:lnum-1)
   if lnum == 0
@@ -38,9 +50,9 @@ function! GetHamlIndent()
   let indent = indent(lnum)
   let cindent = indent(v:lnum)
   if cline =~# '\v^-\s*%(elsif|else|when)>'
-    let indent = cindent < indent ? cindent : indent - &sw
+    let indent = cindent < indent ? cindent : indent - s:sw()
   endif
-  let increase = indent + &sw
+  let increase = indent + s:sw()
   if indent == indent(lnum)
     let indent = cindent <= indent ? -1 : increase
   endif

@@ -20,6 +20,18 @@ endif
 let s:property = '^\s*:\|^\s*[[:alnum:]#{}-]\+\%(:\|\s*=\)'
 let s:extend = '^\s*\%(@extend\|@include\|+\)'
 
+" The shiftwidth() exists since patch 7.3.694
+" Don't require it to exist.
+if exists('*shiftwidth')
+  function s:sw() abort
+    return shiftwidth()
+  endfunction
+else
+  function s:sw() abort
+    return &shiftwidth
+  endfunction
+endif
+
 function! GetSassIndent()
   let lnum = prevnonblank(v:lnum-1)
   let line = substitute(getline(lnum),'\s\+$','','')
@@ -29,9 +41,9 @@ function! GetSassIndent()
   let indent = indent(lnum)
   let cindent = indent(v:lnum)
   if line !~ s:property && line !~ s:extend && cline =~ s:property
-    return indent + &sw
+    return indent + s:sw()
   "elseif line =~ s:property && cline !~ s:property
-    "return indent - &sw
+    "return indent - s:sw()
   else
     return -1
   endif
