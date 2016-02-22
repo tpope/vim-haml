@@ -21,18 +21,24 @@ syn match sassProperty "\%([{};]\s*\|^\)\@<=\%([[:alnum:]-]\|#{[^{}]*}\)\+\s*:" 
 syn match sassProperty "^\s*\zs\s\%(\%([[:alnum:]-]\|#{[^{}]*}\)\+\s*:\|:[[:alnum:]-]\+\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassCssAttribute
 syn match sassProperty "^\s*\zs\s\%(:\=[[:alnum:]-]\+\s*=\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassCssAttribute
 syn match sassCssAttribute +\%("\%([^"]\|\\"\)*"\|'\%([^']\|\\'\)*'\|#{[^{}]*}\|[^{};]\)*+ contained contains=@sassCssAttributes,sassVariable,sassFunction,sassInterpolation
+syn match sassGlobal "!global\>" contained
 syn match sassDefault "!default\>" contained
-syn match sassVariable "!\%(important\>\|default\>\)\@![[:alnum:]_-]\+"
+syn match sassVariable "!\%(important\>\|global\|default\>\)\@![[:alnum:]_-]\+"
 syn match sassVariable "$[[:alnum:]_-]\+"
 syn match sassVariableAssignment "\%([!$][[:alnum:]_-]\+\s*\)\@<=\%(||\)\==" nextgroup=sassCssAttribute skipwhite
 syn match sassVariableAssignment "\%([!$][[:alnum:]_-]\+\s*\)\@<=:" nextgroup=sassCssAttribute skipwhite
 
 syn match sassFunction "\<\%(rgb\|rgba\|red\|green\|blue\|mix\)\>(\@=" contained
-syn match sassFunction "\<\%(hsl\|hsla\|hue\|saturation\|lightness\|adjust-hue\|lighten\|darken\|saturate\|desaturate\|grayscale\|complement\)\>(\@=" contained
+syn match sassFunction "\<\%(hsl\|hsla\|hue\|saturation\|lightness\|adjust-hue\|lighten\|darken\|saturate\|desaturate\|grayscale\|complement\|invert\)\>(\@=" contained
 syn match sassFunction "\<\%(alpha\|opacity\|rgba\|opacify\|fade-in\|transparentize\|fade-out\)\>(\@=" contained
-syn match sassFunction "\<\%(unquote\|quote\)\>(\@=" contained
-syn match sassFunction "\<\%(percentage\|round\|ceil\|floor\|abs\)\>(\@=" contained
-syn match sassFunction "\<\%(type-of\|unit\|unitless\|comparable\)\>(\@=" contained
+syn match sassFunction "\<\%(adjust-color\|scale-color\|change-color\|ie-hex-str\)\>(\@=" contained
+syn match sassFunction "\<\%(unquote\|quote\|str-length\|str-insert\|str-index\|str-slice\|to-upper-case\|to-lower-case\)\>(\@=" contained
+syn match sassFunction "\<\%(percentage\|round\|ceil\|floor\|abs\|min\|max\|random\)\>(\@=" contained
+syn match sassFunction "\<\%(length\|nth\|join\|append\|zip\|index\|list-seperator\)\>(\@=" contained
+syn match sassFunction "\<\%(map-\(get\|merge\|remove\|keys\|values\|has-keys\)\|keywords\)\>(\@=" contained
+syn match sassFunction "\<\%(selector-\(nest\|append\|extend\|replace\|unify\)\|is-superselector\|simple-selectors\|selector-parse\)\>(\@=" contained
+syn match sassFunction "\<\%(feature-exists\|variable-exists\|global-variable-exists\|function-exists\|mixin-exists\|inspect\|type-of\|unit\|unitless\|comparable\|call\)\>(\@=" contained
+syn match sassFunction "\<\%(if\|unique-id\)\>(\@=" contained
 
 syn region sassInterpolation matchgroup=sassInterpolationDelimiter start="#{" end="}" contains=@sassCssAttributes,sassVariable,sassFunction containedin=cssStringQ,cssStringQQ,cssPseudoClass,sassProperty
 
@@ -41,8 +47,11 @@ syn match sassMixin  "^="               nextgroup=sassMixinName skipwhite
 syn match sassMixin  "\%([{};]\s*\|^\s*\)\@<=@mixin"   nextgroup=sassMixinName skipwhite
 syn match sassMixing "^\s\+\zs+"        nextgroup=sassMixinName
 syn match sassMixing "\%([{};]\s*\|^\s*\)\@<=@include" nextgroup=sassMixinName skipwhite
+syn match sassContent "\%([{};]\s*\|^\s*\)\@<=@content"
 syn match sassExtend "\%([{};]\s*\|^\s*\)\@<=@extend"
 syn match sassPlaceholder "\%([{};]\s*\|^\s*\)\@<=%"   nextgroup=sassMixinName skipwhite
+syn match sassOptional "!optional\>" contained
+syn match sassAtRoot "\%([{};]\s*\|^\s*\)\@<=@at-root"
 
 syn match sassFunctionName "[[:alnum:]_-]\+" contained nextgroup=sassCssAttribute
 syn match sassFunctionDecl "\%([{};]\s*\|^\s*\)\@<=@function"   nextgroup=sassFunctionName skipwhite
@@ -64,6 +73,7 @@ syn region sassCharset start="@charset" end=";\|$" contains=scssComment,cssStrin
 syn region sassInclude start="@import" end=";\|$" contains=scssComment,cssStringQ,cssStringQQ,cssURL,cssUnicodeEscape,cssMediaType
 syn region sassDebugLine end=";\|$" matchgroup=sassDebug start="@debug\>" contains=@sassCssAttributes,sassVariable,sassFunction
 syn region sassWarnLine end=";\|$" matchgroup=sassWarn start="@warn\>" contains=@sassCssAttributes,sassVariable,sassFunction
+syn region sassErrorLine end=";\|$" matchgroup=sassError start="@error\>" contains=@sassCssAttributes,sassVariable,sassFunction
 syn region sassControlLine matchgroup=sassControl start="@\%(if\|else\%(\s\+if\)\=\|while\|for\|each\)\>" end="[{};]\@=\|$" contains=sassFor,@sassCssAttributes,sassVariable,sassFunction
 syn keyword sassFor from to through in contained
 
@@ -75,13 +85,17 @@ syn match   sassEndOfLineComment "//.*" contains=sassComment,sassTodo,@Spell
 hi def link sassEndOfLineComment        sassComment
 hi def link sassCssComment              sassComment
 hi def link sassComment                 Comment
+hi def link sassGlobal                  cssImportant
 hi def link sassDefault                 cssImportant
 hi def link sassVariable                Identifier
 hi def link sassFunction                Function
+hi def link sassContent                 PreProc
 hi def link sassMixing                  PreProc
 hi def link sassMixin                   PreProc
+hi def link sassOptional                cssImportant
 hi def link sassPlaceholder             PreProc
 hi def link sassExtend                  PreProc
+hi def link sassAtRoot                  PreProc
 hi def link sassFunctionDecl            PreProc
 hi def link sassReturn                  PreProc
 hi def link sassTodo                    Todo
@@ -91,6 +105,7 @@ hi def link sassMediaOperators          PreProc
 hi def link sassInclude                 Include
 hi def link sassDebug                   sassControl
 hi def link sassWarn                    sassControl
+hi def link sassError                   sassControl
 hi def link sassControl                 PreProc
 hi def link sassFor                     PreProc
 hi def link sassEscape                  Special
