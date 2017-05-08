@@ -21,8 +21,8 @@ syn match sassProperty "\%([{};]\s*\|^\)\@<=\%([[:alnum:]-]\|#{[^{}]*}\)\+\s*:" 
 syn match sassProperty "^\s*\zs\s\%(\%([[:alnum:]-]\|#{[^{}]*}\)\+\s*:\|:[[:alnum:]-]\+\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassCssAttribute
 syn match sassProperty "^\s*\zs\s\%(:\=[[:alnum:]-]\+\s*=\)"hs=s+1 contains=css.*Prop skipwhite nextgroup=sassCssAttribute
 syn match sassCssAttribute +\%("\%([^"]\|\\"\)*"\|'\%([^']\|\\'\)*'\|#{[^{}]*}\|[^{};]\)*+ contained contains=@sassCssAttributes,sassVariable,sassFunction,sassInterpolation
-syn match sassDefault "!default\>" contained
-syn match sassVariable "!\%(important\>\|default\>\)\@![[:alnum:]_-]\+"
+syn match sassFlag "!\%(default\|global\|optional\)\>" contained
+syn match sassVariable "!\%(important\>\|default\>\|global\>\|optional\>\)\@![[:alnum:]_-]\+"
 syn match sassVariable "$[[:alnum:]_-]\+"
 syn match sassVariableAssignment "\%([!$][[:alnum:]_-]\+\s*\)\@<=\%(||\)\==" nextgroup=sassCssAttribute skipwhite
 syn match sassVariableAssignment "\%([!$][[:alnum:]_-]\+\s*\)\@<=:" nextgroup=sassCssAttribute skipwhite
@@ -75,7 +75,7 @@ syn match   sassEndOfLineComment "//.*" contains=sassComment,sassTodo,@Spell
 hi def link sassEndOfLineComment        sassComment
 hi def link sassCssComment              sassComment
 hi def link sassComment                 Comment
-hi def link sassDefault                 cssImportant
+hi def link sassFlag                    cssImportant
 hi def link sassVariable                Identifier
 hi def link sassFunction                Function
 hi def link sassMixing                  PreProc
