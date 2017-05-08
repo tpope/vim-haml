@@ -1,7 +1,7 @@
 " Vim filetype plugin
 " Language:	SCSS
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
-" Last Change:	2010 Jul 26
+" Last Change:	2016 Aug 29
 
 if exists("b:did_ftplugin")
   finish

@@ -2,7 +2,7 @@
 " Language:	Haml
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
 " Filenames:	*.haml
-" Last Change:	2010 Aug 09
+" Last Change:	2016 Aug 29
 
 if exists("b:current_syntax")
   finish

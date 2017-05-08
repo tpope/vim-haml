@@ -1,7 +1,7 @@
 " Vim indent file
 " Language:	Haml
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
-" Last Change:	2010 May 21
+" Last Change:	2016 Aug 29
 
 if exists("b:did_indent")
   finish
