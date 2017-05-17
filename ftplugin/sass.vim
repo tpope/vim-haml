@@ -14,10 +14,18 @@ let b:undo_ftplugin = "setl com< cms< def< inc< inex< ofu< sua<"
 setlocal comments=://
 setlocal commentstring=//\ %s
 setlocal define=^\\s*\\%(@mixin\\\|=\\)
-setlocal includeexpr=substitute(v:fname,'\\%(.*/\\\|^\\)\\zs','_','')
+setlocal includeexpr=SassIncludeExpr(v:fname)
 setlocal omnifunc=csscomplete#CompleteCSS
 setlocal suffixesadd=.sass,.scss,.css
 
 let &l:include = '^\s*@import\s\+\%(url(\)\=["'']\='
+
+function! SassIncludeExpr(file) abort
+  let partial = substitute(a:file, '\%(.*/\|^\)\zs', '_', '')
+  if !empty(findfile(partial))
+    return partial
+  endif
+  return a:file
+endfunction
 
 " vim:set sw=2:
