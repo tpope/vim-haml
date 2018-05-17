@@ -41,7 +41,6 @@ syn match sassMixin  "\%([{};]\s*\|^\s*\)\@<=@mixin"   nextgroup=sassMixinName s
 syn match sassMixing "^\s\+\zs+"        nextgroup=sassMixinName
 syn match sassMixing "\%([{};]\s*\|^\s*\)\@<=@include" nextgroup=sassMixinName skipwhite
 syn match sassExtend "\%([{};]\s*\|^\s*\)\@<=@extend"
-syn match sassPlaceholder "\%([{};]\s*\|^\s*\)\@<=%"   nextgroup=sassMixinName skipwhite
 
 syn match sassFunctionName "[[:alnum:]_-]\+" contained nextgroup=sassCssAttribute
 syn match sassFunctionDecl "\%([{};]\s*\|^\s*\)\@<=@function"   nextgroup=sassFunctionName skipwhite
@@ -51,6 +50,7 @@ syn match sassEscape     "^\s*\zs\\"
 syn match sassIdChar     "#[[:alnum:]_-]\@=" nextgroup=sassId
 syn match sassId         "[[:alnum:]_-]\+" contained
 syn match sassClassChar  "\.[[:alnum:]_-]\@=" nextgroup=sassClass
+syn match sassPlaceholder "\%([{};]\s*\|^\s*\)\@<=%"   nextgroup=sassClass
 syn match sassClass      "[[:alnum:]_-]\+" contained
 syn match sassAmpersand  "&"
 
@@ -79,7 +79,7 @@ hi def link sassVariable                Identifier
 hi def link sassFunction                Function
 hi def link sassMixing                  PreProc
 hi def link sassMixin                   PreProc
-hi def link sassPlaceholder             PreProc
+hi def link sassPlaceholder             sassClassChar
 hi def link sassExtend                  PreProc
 hi def link sassFunctionDecl            PreProc
 hi def link sassReturn                  PreProc
