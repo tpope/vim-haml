@@ -9,16 +9,19 @@ if exists("b:did_ftplugin")
 endif
 let b:did_ftplugin = 1
 
-let b:undo_ftplugin = "setl com< cms< def< inc< inex< isk< ofu< sua<"
+let b:undo_ftplugin = "setl com< cms< def< inc< inex< ofu< sua<"
 
 setlocal comments=://
 setlocal commentstring=//\ %s
 setlocal includeexpr=SassIncludeExpr(v:fname)
-setlocal iskeyword+=-
-setlocal iskeyword+=$
-setlocal iskeyword+=%
 setlocal omnifunc=csscomplete#CompleteCSS
 setlocal suffixesadd=.sass,.scss,.css
+if &filetype =~# '\<s[ac]ss]\>'
+  setlocal iskeyword+=-
+  setlocal iskeyword+=$
+  setlocal iskeyword+=%
+  let b:undo_ftplugin .= ' isk<'
+endif
 
 let &l:define = '^\C\v\s*%(\@function|\@mixin|\=)|^\s*%(\$[[:alnum:]-]+:|[%.][:alnum:]-]+\s*%(\{|$))@='
 let &l:include = '^\s*@import\s\+\%(url(\)\=["'']\='
