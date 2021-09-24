@@ -12,6 +12,8 @@ setlocal autoindent sw=2 et
 setlocal indentexpr=GetSassIndent()
 setlocal indentkeys=o,O,*<Return>,<:>,!^F
 
+let b:undo_indent = "setl ai< inde< indk<"
+
 " Only define the function once.
 if exists("*GetSassIndent")
   finish
