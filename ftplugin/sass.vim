@@ -23,6 +23,11 @@ if &filetype =~# '\<s[ac]ss]\>'
   let b:undo_ftplugin .= ' isk<'
 endif
 
+if get(g:, 'sass_recommended_style', 1)
+  setlocal shiftwidth=2 softtabstop=2 expandtab
+  let b:undo_ftplugin .= ' sw< sts< et<'
+endif
+
 let &l:define = '^\C\v\s*%(\@function|\@mixin|\=)|^\s*%(\$[[:alnum:]-]+:|[%.][:alnum:]-]+\s*%(\{|$))@='
 let &l:include = '^\s*@import\s\+\%(url(\)\=["'']\='
 

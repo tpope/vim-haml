@@ -8,7 +8,7 @@ if exists("b:did_indent")
 endif
 let b:did_indent = 1
 
-setlocal autoindent sw=2 et
+setlocal autoindent
 setlocal indentexpr=GetSassIndent()
 setlocal indentkeys=o,O,*<Return>,<:>,!^F
 
