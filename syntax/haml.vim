@@ -2,7 +2,7 @@
 " Language:	Haml
 " Maintainer:	Tim Pope <vimNOSPAM@tpope.org>
 " Filenames:	*.haml
-" Last Change:	2019 Dec 05
+" Last Change:	2023 May 29
 
 if exists("b:current_syntax")
   finish
@@ -32,7 +32,7 @@ syn match   hamlBegin "^\s*\%([<>]\|&[^=~ ]\)\@!" nextgroup=hamlTag,hamlClassCha
 
 syn match   hamlTag        "%\w\+\%(:\w\+\)\=" contained contains=htmlTagName,htmlSpecialTagName nextgroup=@hamlComponent
 syn region  hamlAttributes     matchgroup=hamlAttributesDelimiter start="(" end=")" contained contains=htmlArg,hamlAttributeString,hamlAttributeVariable,htmlEvent,htmlCssDefinition nextgroup=@hamlComponent
-syn region  hamlAttributesHash matchgroup=hamlAttributesDelimiter start="{" end="}" contained contains=@hamlRubyTop nextgroup=@hamlComponent
+syn region  hamlAttributesHash matchgroup=hamlAttributesDelimiter start="{" end="}" skip="{.\{-\}}" contained contains=@hamlRubyTop nextgroup=@hamlComponent keepend
 syn region  hamlObject         matchgroup=hamlObjectDelimiter     start="\[" end="\]" contained contains=@hamlRubyTop nextgroup=@hamlComponent
 syn match   hamlDespacer "[<>]" contained nextgroup=hamlDespacer,hamlSelfCloser,hamlRuby,hamlPlainChar,hamlInterpolatable
 syn match   hamlSelfCloser "/" contained
