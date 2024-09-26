@@ -100,6 +100,7 @@ hi def link sassInterpolationDelimiter  Delimiter
 hi def link sassAmpersand               Character
 hi def link sassId                      Identifier
 hi def link sassClass                   Type
+hi def link sassMixinName               Function
 
 let b:current_syntax = "sass"
 
